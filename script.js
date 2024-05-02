@@ -30,13 +30,16 @@ function startTimer(duration) {
 
 startButton.addEventListener('click', function () {
     let minutes = parseInt(minutesInput.value);
-    console.log(minutes);
+    if(minutes == NaN) {
+        console.log("Geçersiz veri");
+    } else {
         startTimer(minutes);
         minutesInput.value = '';
         startButton.disabled = true;
         pauseButton.disabled = false;
         resumeButton.disabled = true;
-        resetButton.disabled = false;
+        resetButton.disabled = false;   
+    }
 });
 
 pauseButton.addEventListener('click', function () {
