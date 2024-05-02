@@ -12,8 +12,10 @@ function startTimer(duration) {
     let timer = duration * 60 + remainingTime;
     let minutes, seconds;
 
-    console.log(minutesInput);
-
+    if(minutesInput == "NaN:NaN") {
+        console.log("input nan");
+    }
+    
     timerInterval = setInterval(function () {
         minutes = Math.floor(timer / 60);
         seconds = timer % 60;
