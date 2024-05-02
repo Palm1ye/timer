@@ -57,11 +57,7 @@ pauseButton.addEventListener('click', function () {
 });
 
 resumeButton.addEventListener('click', function () {
-    let currentTimer = timerDisplay.textContent.split(':');
-    let minutes = parseInt(currentTimer[0]);
-    let seconds = parseInt(currentTimer[1]);
-    remainingTime = minutes * 60 + seconds;
-    startTimer(minutes);
+    startTimer(0);
     pauseButton.disabled = false;
     resumeButton.disabled = true;
 });
