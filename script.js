@@ -11,10 +11,6 @@ let timerDisplay = document.getElementById('timer');
 function startTimer(duration) {
     let timer = duration * 60 + remainingTime;
     let minutes, seconds;
-
-    if(minutesInput == "NaN:NaN") {
-        console.log("input nan");
-    }
     
     timerInterval = setInterval(function () {
         minutes = Math.floor(timer / 60);
@@ -34,12 +30,16 @@ function startTimer(duration) {
 
 startButton.addEventListener('click', function () {
     let minutes = parseInt(minutesInput.value);
-    startTimer(minutes);
-    minutesInput.value = '';
-    startButton.disabled = true;
-    pauseButton.disabled = false;
-    resumeButton.disabled = true;
-    resetButton.disabled = false;
+    if(minutes ==) {
+        console.log("nan");
+    } else {
+        startTimer(minutes);
+        minutesInput.value = '';
+        startButton.disabled = true;
+        pauseButton.disabled = false;
+        resumeButton.disabled = true;
+        resetButton.disabled = false;
+    }
 });
 
 pauseButton.addEventListener('click', function () {
