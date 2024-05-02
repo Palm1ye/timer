@@ -30,7 +30,7 @@ function startTimer(duration) {
 
 startButton.addEventListener('click', function () {
     let minutes = parseInt(minutesInput.value);
-    if(minutes == NaN) {
+    if(minutes == "NaN") {
         console.log("Geçersiz veri");
     } else {
         startTimer(minutes);
