@@ -12,9 +12,7 @@ function startTimer(duration) {
     let timer = duration * 60 + remainingTime;
     let minutes, seconds;
 
-    if(document.getElementById('minutes') == 0) {
-        clearInterval(timerInterval);
-    }
+    console.log(minutesInput);
 
     timerInterval = setInterval(function () {
         minutes = Math.floor(timer / 60);
