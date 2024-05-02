@@ -11,7 +11,7 @@ let timerDisplay = document.getElementById('timer');
 function startTimer(duration) {
     let timer = duration * 60 + remainingTime;
     let minutes, seconds;
-
+    
     timerInterval = setInterval(function () {
         minutes = Math.floor(timer / 60);
         seconds = timer % 60;
@@ -30,12 +30,23 @@ function startTimer(duration) {
 
 startButton.addEventListener('click', function () {
     let minutes = parseInt(minutesInput.value);
-    startTimer(minutes);
-    minutesInput.value = '';
-    startButton.disabled = true;
-    pauseButton.disabled = false;
-    resumeButton.disabled = true;
-    resetButton.disabled = false;
+    if(Number.isInteger(minutes) == false) {
+        clearInterval(timerInterval);
+        timerDisplay.textContent = '00:00';
+        minutesInput.value = '';
+        remainingTime = 0;
+        startButton.disabled = false;
+        pauseButton.disabled = true;
+        resumeButton.disabled = true;
+    } else {
+        console.log(minutes);
+        startTimer(minutes);
+        minutesInput.value = '';
+        startButton.disabled = true;
+        pauseButton.disabled = false;
+        resumeButton.disabled = true;
+        resetButton.disabled = false;   
+    }
 });
 
 pauseButton.addEventListener('click', function () {
@@ -55,7 +66,7 @@ resumeButton.addEventListener('click', function () {
     resumeButton.disabled = true;
 });
 
-resetButton.addEventListener('click', function () {
+resetButton.addEventListener('click', function() {
     clearInterval(timerInterval);
     timerDisplay.textContent = '00:00';
     minutesInput.value = '';
