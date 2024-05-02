@@ -30,16 +30,13 @@ function startTimer(duration) {
 
 startButton.addEventListener('click', function () {
     let minutes = parseInt(minutesInput.value);
-    if(minutes ==) {
-        console.log("nan");
-    } else {
+    console.log(minutes);
         startTimer(minutes);
         minutesInput.value = '';
         startButton.disabled = true;
         pauseButton.disabled = false;
         resumeButton.disabled = true;
         resetButton.disabled = false;
-    }
 });
 
 pauseButton.addEventListener('click', function () {
