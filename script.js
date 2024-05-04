@@ -28,6 +28,15 @@ function startTimer(duration) {
     }, 1000);
 }
 
+function handleEnterKeyPress(event) {
+    if (event.key === 'Enter') {
+        event.preventDefault(); // ignore submit thing
+        startButton.click(); // simulate click
+    }
+}
+
+minutesInput.addEventListener('keypress', handleEnterKeyPress);
+
 startButton.addEventListener('click', function () {
     let minutes = parseInt(minutesInput.value);
     if(Number.isInteger(minutes) == false) {
