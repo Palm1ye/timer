@@ -40,7 +40,7 @@ minutesInput.addEventListener('keypress', handleEnterKeyPress);
 startButton.addEventListener('click', function () {
     let minutes = parseInt(minutesInput.value);
     if(Number.isInteger(minutes) == false) {
-        resetButton.click("click"); /* the functions directly on the reset button will be triggered */
+        resetButton.click(); /* the functions directly on the reset button will be triggered */
     } else {
         startTimer(minutes);
         minutesInput.value = '';
