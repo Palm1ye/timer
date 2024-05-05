@@ -40,15 +40,8 @@ minutesInput.addEventListener('keypress', handleEnterKeyPress);
 startButton.addEventListener('click', function () {
     let minutes = parseInt(minutesInput.value);
     if(Number.isInteger(minutes) == false) {
-        clearInterval(timerInterval);
-        timerDisplay.textContent = '00:00';
-        minutesInput.value = '';
-        remainingTime = 0;
-        startButton.disabled = false;
-        pauseButton.disabled = true;
-        resumeButton.disabled = true;
+        resetButton.click("click"); /* the functions directly on the reset button will be triggered */
     } else {
-        console.log(minutes);
         startTimer(minutes);
         minutesInput.value = '';
         startButton.disabled = true;
