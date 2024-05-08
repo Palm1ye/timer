@@ -8,6 +8,11 @@ let resumeButton = document.getElementById('resume');
 let resetButton = document.getElementById('reset');
 let timerDisplay = document.getElementById('timer');
 
+timerDisplay.style.display = "none";
+resetButton.style.display = "none";
+pauseButton.style.display = "none";
+resumeButton.style.display = "none";
+
 function startTimer(duration) {
     let timer = duration * 60 + remainingTime;
     let minutes, seconds;
@@ -25,7 +30,7 @@ function startTimer(duration) {
             clearInterval(timerInterval);
             timerDisplay.textContent = 'Süre Doldu!';
         }
-    }, 1000);
+    }, 500);
 }
 
 function handleEnterKeyPress(event) {
@@ -39,29 +44,31 @@ minutesInput.addEventListener('keypress', handleEnterKeyPress);
 
 startButton.addEventListener('click', function () {
     let minutes = parseInt(minutesInput.value);
-    if(Number.isInteger(minutes) == false) {
-        resetButton.click(); /* the functions directly on the reset button will be triggered */
-    } else {
+    if(Number.isInteger(minutes) == true && minutes > 0) {
         startTimer(minutes);
+        timerDisplay.style.display = "block";
+        startButton.style.display = "none";
+        minutesInput.style.display = "none";
+        pauseButton.style.display = "inline";
+        resumeButton.style.display = "none";
+        resetButton.style.display = "inline";
         minutesInput.value = '';
-        startButton.disabled = true;
-        pauseButton.disabled = false;
-        resumeButton.disabled = true;
-        resetButton.disabled = false;   
+    } else {
+        resetButton.click();
     }
 });
 
 pauseButton.addEventListener('click', function () {
     clearInterval(timerInterval);
     remainingTime = parseInt(timerDisplay.textContent.split(':')[0]) * 60 + parseInt(timerDisplay.textContent.split(':')[1]);
-    pauseButton.disabled = true;
-    resumeButton.disabled = false;
+    resumeButton.style.display = "inline";
+    pauseButton.style.display = "none";
 });
 
 resumeButton.addEventListener('click', function () {
     startTimer(0);
-    pauseButton.disabled = false;
-    resumeButton.disabled = true;
+    resumeButton.style.display = "none";
+    pauseButton.style.display = "inline";
 });
 
 resetButton.addEventListener('click', function() {
@@ -69,7 +76,10 @@ resetButton.addEventListener('click', function() {
     timerDisplay.textContent = '00:00';
     minutesInput.value = '';
     remainingTime = 0;
-    startButton.disabled = false;
-    pauseButton.disabled = true;
-    resumeButton.disabled = true;
+    timerDisplay.style.display = "none";
+    minutesInput.style.display = "inline";
+    startButton.style.display = "inline"
+    resumeButton.style.display = "none";
+    pauseButton.style.display = "none";
+    resetButton.style.display = "none";
 });
