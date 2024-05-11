@@ -30,7 +30,7 @@ function startTimer(duration) {
             clearInterval(timerInterval);
             timerDisplay.textContent = 'Süre Doldu!';
         }
-    }, 500);
+    }, 1000);
 }
 
 function handleEnterKeyPress(event) {
