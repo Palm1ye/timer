@@ -8,10 +8,80 @@ let resumeButton = document.getElementById('resume');
 let resetButton = document.getElementById('reset');
 let timerDisplay = document.getElementById('timer');
 
-timerDisplay.style.display = "none";
-resetButton.style.display = "none";
-pauseButton.style.display = "none";
-resumeButton.style.display = "none";
+Notification.requestPermission();
+
+function sendNotification(v1, v2) {
+    var title = v1;
+    var body = v2;
+    new Notification(title, { body });
+}
+
+function timer(status) {
+    if(status == true)
+        timerDisplay.style.display = "block";
+    else if(status == false) {
+        timerDisplay.style.display = "none";
+    } else {
+        console.log("timer function called with unexpected parameter!");
+    }
+}
+
+function start(status) {
+    if(status == true)
+        startButton.style.display = "inline";
+    else if(status == false) {
+        startButton.style.display = "none";
+    } else {
+        console.log("start function called with unexpected parameter!");
+    }
+}
+
+function pause(status) {
+    if(status == true)
+        pauseButton.style.display = "inline";
+    else if(status == false) {
+        pauseButton.style.display = "none";
+    } else {
+        console.log("pause function called with unexpected parameter!");
+    }
+}
+
+function resume(status) {
+    if(status == true)
+        resumeButton.style.display = "inline";
+    else if(status == false) {
+        resumeButton.style.display = "none";
+    } else {
+        console.log("resume function called with unexpected parameter!");
+    }
+}
+
+function reset(status) {
+    if(status == true)
+        resetButton.style.display = "inline";
+    else if(status == false) {
+        resetButton.style.display = "none";
+    } else {
+        console.log("reset function called with unexpected parameter!");
+    }
+}
+
+function minput(status) {
+    if(status == true)
+        minutesInput.style.display = "inline";
+    else if(status == false) {
+        minutesInput.style.display = "none";
+    } else {
+        console.log("minput function called with unexpected parameter!");
+    }
+}
+
+timer(false);
+start(true);
+pause(false);
+resume(false);
+reset(false);
+minput(true);
 
 function startTimer(duration) {
     let timer = duration * 60 + remainingTime;
@@ -28,15 +98,20 @@ function startTimer(duration) {
 
         if (--timer < 0) {
             clearInterval(timerInterval);
-            timerDisplay.textContent = 'Süre Doldu!';
+            timerDisplay.textContent = "Time is up!";
+            sendNotification("Time is up!", "The timer you set has expired!");
+            start(false);
+            pause(false);
+            resume(false);
+            reset(true);
         }
     }, 1000);
 }
 
 function handleEnterKeyPress(event) {
     if (event.key === 'Enter') {
-        event.preventDefault(); // ignore submit thing
-        startButton.click(); // simulate click
+        event.preventDefault(); 
+        startButton.click();
     }
 }
 
@@ -46,12 +121,12 @@ startButton.addEventListener('click', function () {
     let minutes = parseInt(minutesInput.value);
     if(Number.isInteger(minutes) == true && minutes > 0) {
         startTimer(minutes);
-        timerDisplay.style.display = "block";
-        startButton.style.display = "none";
-        minutesInput.style.display = "none";
-        pauseButton.style.display = "inline";
-        resumeButton.style.display = "none";
-        resetButton.style.display = "inline";
+        timer(true);
+        pause(true);
+        reset(true);
+        start(false);
+        pause(true);
+        minput(false);
         minutesInput.value = '';
     } else {
         resetButton.click();
@@ -61,14 +136,14 @@ startButton.addEventListener('click', function () {
 pauseButton.addEventListener('click', function () {
     clearInterval(timerInterval);
     remainingTime = parseInt(timerDisplay.textContent.split(':')[0]) * 60 + parseInt(timerDisplay.textContent.split(':')[1]);
-    resumeButton.style.display = "inline";
-    pauseButton.style.display = "none";
+    resume(true);
+    pause(false);
 });
 
 resumeButton.addEventListener('click', function () {
     startTimer(0);
-    resumeButton.style.display = "none";
-    pauseButton.style.display = "inline";
+    resume(false);
+    pause(true);
 });
 
 resetButton.addEventListener('click', function() {
@@ -76,10 +151,10 @@ resetButton.addEventListener('click', function() {
     timerDisplay.textContent = '00:00';
     minutesInput.value = '';
     remainingTime = 0;
-    timerDisplay.style.display = "none";
-    minutesInput.style.display = "inline";
-    startButton.style.display = "inline"
-    resumeButton.style.display = "none";
-    pauseButton.style.display = "none";
-    resetButton.style.display = "none";
+    timer(false);
+    start(true);
+    pause(false);
+    resume(false);
+    reset(false);
+    minput(true);
 });
